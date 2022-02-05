@@ -48,7 +48,27 @@ namespace BethanysPieShopHR
 
             Console.WriteLine(startDate);
 
+            string firstName = "Bethany";
+            string lastName = "Smith";
 
+            string fullName = firstName + " " + lastName;
+
+            Console.WriteLine(fullName);
+
+            string formatFullName = string.Format("Full name is {0} {1}.", firstName, lastName);
+
+            Console.WriteLine(formatFullName);
+
+            string interpolationFullName = $"Full name is {firstName} {lastName}.";
+
+            Console.WriteLine(interpolationFullName);
+
+            Console.WriteLine("Enter a wage:");
+            string wage = Console.ReadLine();
+
+            int wageValue = int.Parse(wage);
+
+            Console.WriteLine($"Wage Value is: {wageValue}");
 
 
 
