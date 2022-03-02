@@ -72,15 +72,25 @@ namespace BethanysPieShopHR
 
             int monthlyWage = 1234;
             int months = 12;
+            int bonus = 1000;
+
+            Console.WriteLine($"{monthlyWage}, {months}, {bonus}");
 
             CalculateYearlyWage(monthlyWage, months);
 
             //Console.ReadLine();
         }
 
-        public static void CalculateYearlyWage(int monthlyWage, int numberOfMonthsWorked)
+        public static int CalculateYearlyWage(int monthlyWage, int numberOfMonthsWorked)
         {
-            Console.WriteLine($"Yearly wage: {monthlyWage * numberOfMonthsWorked}");
+            Console.WriteLine($"Yearly wage A: {monthlyWage * numberOfMonthsWorked}");
+            return monthlyWage * numberOfMonthsWorked;
+        }
+
+        public static int CalculateYearlyWage(int monthlyWage, int numberOfMonthsWorked, int bonus)
+        {
+            Console.WriteLine($"Yearly wage B: {monthlyWage * numberOfMonthsWorked + bonus}");
+            return monthlyWage * numberOfMonthsWorked + bonus;
         }
     }
 }
