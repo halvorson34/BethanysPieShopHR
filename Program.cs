@@ -29,6 +29,7 @@ namespace BethanysPieShopHRMEmployeeApp
                 Console.WriteLine("1: Register employee");
                 Console.WriteLine("2: Register work hours for employee");
                 Console.WriteLine("3: Pay employee");
+                Console.WriteLine("4: Change an employee's hourly rate");
                 Console.WriteLine("9: Quit application");
 
                 userSelection = Console.ReadLine();
@@ -43,6 +44,9 @@ namespace BethanysPieShopHRMEmployeeApp
                         break;
                     case "3":
                         PayEmployee();
+                        break;
+                    case "4":
+                        ChangeEmployeeRate();
                         break;
                     case "9": break;
                     default:
@@ -110,6 +114,27 @@ namespace BethanysPieShopHRMEmployeeApp
             double receivedWage = selectedEmployee.ReceiveWage(out hoursWorked);
 
             Console.WriteLine($"{selectedEmployee.FirstName} {selectedEmployee.LastName} has received a wage of {receivedWage}. The hours worked is reset to {hoursWorked}.\n\n");
+        }
+
+        private static void ChangeEmployeeRate()
+        {
+            Console.WriteLine("Select an employee");
+
+            for (int i = 1; i <= employees.Count; i++)
+            {
+                Console.WriteLine($"{i}. {employees[i - 1].FirstName} {employees[i - 1].LastName}");
+            }
+
+            int selection = int.Parse(Console.ReadLine());//we will assume here that a valid ID is selected
+
+            Employee selectedEmployee = employees[selection - 1];
+
+
+            Console.WriteLine($"{selectedEmployee.FirstName}'s current hourly rate is {selectedEmployee.HourlyRate}");
+            Console.WriteLine("The new hourly rate will be: ");
+            selectedEmployee.HourlyRate = double.Parse(Console.ReadLine());
+
+            Console.WriteLine($"New hourly rate set for {selectedEmployee.FirstName}!\n\n");
         }
     }
 }
