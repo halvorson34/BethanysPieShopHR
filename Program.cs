@@ -134,7 +134,7 @@ namespace BethanysPieShopHRMEmployeeApp
             Console.WriteLine("The new hourly rate will be: ");
             selectedEmployee.HourlyRate = double.Parse(Console.ReadLine());
 
-            Console.WriteLine($"New hourly rate set for {selectedEmployee.FirstName}!\n\n");
+            Console.WriteLine($"New hourly rate set for {selectedEmployee.FirstName}\n\n");
         }
     }
 }
