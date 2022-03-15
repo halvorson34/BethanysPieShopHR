@@ -133,12 +133,4 @@ namespace BethanysPieShopHRM
             Console.WriteLine($"\nFirst name: {FirstName}\nLast name: {LastName}\nEmail: {Email}\nBirthday: {BirthDay.ToShortDateString()}\nEmployee type: {EmployeeType}\n");
         }
     }
-
-    public enum EmployeeType
-    {
-        Sales,
-        Manager,
-        Research,
-        StoreManager
-    }
 }
