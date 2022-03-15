@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BethanyPieShopHRM.Accounting
+namespace BethanysPieShopHRM.Accounting
 {
     public class Account
     {

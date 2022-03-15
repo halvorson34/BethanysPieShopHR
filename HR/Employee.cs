@@ -8,17 +8,6 @@ namespace BethanysPieShopHRM.HR
 {
     public class Employee
     {
-        //public string firstName;
-        //public string lastName;
-        //public string email;
-
-        //public int numberOfHoursWorked;
-        //public double wage;
-        //public double hourlyRate;
-
-        //public DateTime birthDay;
-        //EmployeeType employeeType;
-
         private string firstName;
         private string lastName;
         private string email;
@@ -26,9 +15,11 @@ namespace BethanysPieShopHRM.HR
         private int numberOfHoursWorked;
         private double wage;
         private double hourlyRate;
-
         private DateTime birthDay;
+
         private EmployeeType employeeType;
+        public static double taxRate = 0.15;
+        private const double maxAmountHoursWorked = 1000;
 
         public string FirstName
         {
@@ -120,7 +111,10 @@ namespace BethanysPieShopHRM.HR
 
         public double ReceiveWage()
         {
-            Wage = NumberOfHoursWorked * HourlyRate;
+            double wageBeforeTax = NumberOfHoursWorked * HourlyRate;
+            double taxAmount = wageBeforeTax * taxRate;
+
+            Wage = wageBeforeTax - taxAmount;
 
             Console.WriteLine($"The wage for {NumberOfHoursWorked} hours of work is {Wage}.");
             NumberOfHoursWorked = 0;
@@ -130,7 +124,12 @@ namespace BethanysPieShopHRM.HR
 
         public void DisplayEmployeeDetails()
         {
-            Console.WriteLine($"\nFirst name: {FirstName}\nLast name: {LastName}\nEmail: {Email}\nBirthday: {BirthDay.ToShortDateString()}\nEmployee type: {EmployeeType}\n");
+            Console.WriteLine($"\nFirst name: {FirstName}\nLast name: {LastName}\nEmail: {Email}\nBirthday: {BirthDay.ToShortDateString()}\nEmployee type: {EmployeeType}\nTax rate: {taxRate}\n");
+        }
+
+        public static void DisplayTaxRate()
+        {
+            Console.WriteLine($"The current tax rate is {taxRate}");
         }
     }
 }

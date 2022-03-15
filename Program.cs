@@ -1,4 +1,5 @@
-﻿using BethanysPieShopHRM.HR;
+﻿using BethanysPieShopHRM.Accounting;
+using BethanysPieShopHRM.HR;
 using System;
 
 namespace BethanysPieShopHRM
@@ -11,24 +12,23 @@ namespace BethanysPieShopHRM
             Console.WriteLine("--------------------\n");
 
             Employee bethany = new Employee("Bethany", "Smith", "bethany@snowball.be", new DateTime(1979, 1, 16), EmployeeType.Manager, 25);
-
-            bethany.DisplayEmployeeDetails();
-            bethany.PerformWork();
-            bethany.PerformWork();
-            bethany.PerformWork();
-            bethany.ReceiveWage();
-
-            //bethany.firstName = "John";
-            //bethany.hourlyRate = 10;
-            bethany.FirstName = "John";
-            bethany.HourlyRate = 10;
-            bethany.DisplayEmployeeDetails();
-            bethany.PerformWork();
-            bethany.PerformWork();
-            bethany.PerformWork();
-            bethany.ReceiveWage();
-
             Employee george = new Employee("George", "Jones", "george@snowball.be", new DateTime(1984, 3, 28), EmployeeType.Research, 30);
+
+            Employee.DisplayTaxRate();
+
+            #region First run Bethany
+
+            bethany.DisplayEmployeeDetails();
+            bethany.PerformWork();
+            bethany.PerformWork();
+            bethany.PerformWork();
+            bethany.ReceiveWage();
+
+            #endregion
+
+
+            #region First run George
+
             george.DisplayEmployeeDetails();
             george.PerformWork();
             george.PerformWork();
@@ -37,11 +37,34 @@ namespace BethanysPieShopHRM
             george.PerformWork();
             george.ReceiveWage();
 
-            Employee testEmployee = bethany;
-            testEmployee.FirstName = "Gill";
+            #endregion
 
-            testEmployee.DisplayEmployeeDetails();
+            Employee.taxRate = 0.02;
+
+            #region Second run Bethany
+
             bethany.DisplayEmployeeDetails();
+            bethany.PerformWork();
+            bethany.PerformWork();
+            bethany.PerformWork();
+            bethany.ReceiveWage();
+
+            #endregion
+
+
+            #region Second run George
+
+            george.DisplayEmployeeDetails();
+            george.PerformWork();
+            george.PerformWork();
+            george.PerformWork();
+            george.PerformWork();
+            george.PerformWork();
+            george.ReceiveWage();
+
+            #endregion
+
+            Customer customer = new Customer();
 
             Console.ReadLine();
         }
