@@ -1,25 +1,21 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BethanysPieShopHRM.HR
 {
-    public class Employee
+    public class Employee : IComparable, IEmployee
     {
+        private int id;
         private string firstName;
         private string lastName;
         private string email;
 
         private int numberOfHoursWorked;
         private double wage;
-        private double hourlyRate;
+        private double? hourlyRate;
+        public static double taxRate = 0.15;
+
         private DateTime birthDay;
 
-        private EmployeeType employeeType;
-        public static double taxRate = 0.15;
-        private const double maxAmountHoursWorked = 1000;
 
         public string FirstName
         {
@@ -29,7 +25,6 @@ namespace BethanysPieShopHRM.HR
                 firstName = value;
             }
         }
-
         public string LastName
         {
             get { return lastName; }
@@ -62,7 +57,7 @@ namespace BethanysPieShopHRM.HR
                 wage = value;
             }
         }
-        public double HourlyRate
+        public double? HourlyRate
         {
             get { return hourlyRate; }
             set
@@ -78,23 +73,24 @@ namespace BethanysPieShopHRM.HR
                 birthDay = value;
             }
         }
-        public EmployeeType EmployeeType
+
+        public int Id
         {
-            get { return employeeType; }
+            get { return id; }
             set
             {
-                employeeType = value;
+                id = value;
             }
         }
 
-        public Employee(string first, string last, string em, DateTime bd, EmployeeType empType, double rate)
+        public Employee(int empId, string first, string last, string em, DateTime bd, double? rate)
         {
+            Id = empId;
             FirstName = first;
             LastName = last;
             Email = em;
             BirthDay = bd;
-            EmployeeType = empType;
-            HourlyRate = rate;
+            HourlyRate = rate ?? 10;
         }
 
         public void PerformWork()
@@ -104,6 +100,7 @@ namespace BethanysPieShopHRM.HR
             Console.WriteLine($"{FirstName} {LastName} is now working!");
         }
 
+
         public void StopWorking()
         {
             Console.WriteLine($"{FirstName} {LastName} has stopped working!");
@@ -111,7 +108,7 @@ namespace BethanysPieShopHRM.HR
 
         public double ReceiveWage()
         {
-            double wageBeforeTax = NumberOfHoursWorked * HourlyRate;
+            double wageBeforeTax = NumberOfHoursWorked * HourlyRate.Value;
             double taxAmount = wageBeforeTax * taxRate;
 
             Wage = wageBeforeTax - taxAmount;
@@ -122,14 +119,35 @@ namespace BethanysPieShopHRM.HR
             return Wage;
         }
 
+        public virtual void GiveBonus()
+        {
+            Console.WriteLine($"{FirstName} {LastName} received a generic bonus of 100!");
+        }
+
         public void DisplayEmployeeDetails()
         {
-            Console.WriteLine($"\nFirst name: {FirstName}\nLast name: {LastName}\nEmail: {Email}\nBirthday: {BirthDay.ToShortDateString()}\nEmployee type: {EmployeeType}\nTax rate: {taxRate}\n");
+            Console.WriteLine($"\nID: {Id}\nFirst name: {FirstName}\nLast name: {LastName}\nEmail: {Email}\nBirthday: {BirthDay.ToShortDateString()}\nTax rate: {taxRate}");
         }
 
         public static void DisplayTaxRate()
         {
             Console.WriteLine($"The current tax rate is {taxRate}");
+        }
+
+        public int CompareTo(object obj)
+        {
+            var otherEmployee = (Employee)obj;
+            if (Id > otherEmployee.Id)
+                return 1;
+            else if (Id < otherEmployee.Id)
+                return -1;
+            else
+                return 0;
+        }
+
+        public void GiveCompliment()
+        {
+            Console.WriteLine($"You've done a great job, {FirstName}");
         }
     }
 }
